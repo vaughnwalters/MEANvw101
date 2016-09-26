@@ -11,8 +11,19 @@
 
 // if i want the title to come from a node server, set it as a variable for an $http request
 // this sets up a route.  so when a request comes in to /api/title, then 
+// to use angular-routes, inject it into the module to make available to all the controllers
+// need a controller here, but also need a config to handle configuration ($routeProvider)
+// so! when at the root, go to the main controller and use a template for the partial to be shown
+
 angular
-  .module('mean101', [])
+  .module('mean101', ['ngRoute'])
+  .config($routeProvider =>
+    $routeProvider
+      .when('/', {
+        controller: 'main',
+        templateUrl: 'partials/main.html',
+      })
+  )
   .controller('main', function ($scope, $http) {
     $http
       .get('/api/title')
