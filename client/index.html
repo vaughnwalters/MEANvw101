@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MEAN 101</title>
+  </head>
+  <body>
+    <!-- always do ng-app to define that the root of the app is  and what angular has control of
+    so in this example, it will have control of everything inside this div-->
+    <div ng-app="mean101">
+      <div ng-controller="main">
+        <h1>{{title}}</h1>
+      </div>
+    <script src="/lib/angular/angular.min.js"></script>
+    <!-- INJECT THE SCRIPT TAG HERE -->
+    <script src="/app/main.js"></script>
+  </body>
+</html>
