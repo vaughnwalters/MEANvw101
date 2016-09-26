@@ -54,5 +54,9 @@ npm install bower --save-dev
 node_modules/.bin/bower init
 
 
+// #######
+// everything we have done for front end would go in the client side folder
+
+
 
 
