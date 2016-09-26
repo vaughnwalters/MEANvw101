@@ -1,5 +1,6 @@
 'use strict'
 
+const { json } = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 
@@ -10,12 +11,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 app.use(express.static('client'))
-
-// everything in mongoose is created in models, so we need to create a model we can grab our mesasges from
-const Message = mongoose.model('message', {
-  author: String,
-  content: String,
-})
+app.use(json())
 
 // want the title 'MEAN 101'  to come from node
 // set up a route and then when route gets hit, it sends the title
@@ -23,6 +19,12 @@ const Message = mongoose.model('message', {
 app.get('/api/title', (req, res) =>
   res.json({ title: 'MEAN Chat' })
 )
+
+// everything in mongoose is created in models, so we need to create a model we can grab our mesasges from
+const Message = mongoose.model('message', {
+  author: String,
+  content: String,
+})
 
 // HARDCODE FIRST, THEN REPLACE WITH DYNAMIC CONTENT FROM DB
 // app.get('/api/messages', (req, res) =>
@@ -46,6 +48,15 @@ app.get('/api/messages', (req, res, err) =>
     .then(messages => res.json({ messages }))
     .catch(err)
 )
+
+// with XHL we want to get the data from the from the req.body
+app.post('/api/messages', (req, res, err) =>
+  Message
+    .create(req.body)
+    .then(msg => res.json(msg))
+    .catch(err)
+)
+
 
 mongoose.Promise = Promise
 // make sure mongoose is connected before we listen

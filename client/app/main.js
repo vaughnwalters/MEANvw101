@@ -35,6 +35,7 @@ angular
         $scope.title = title
       )
   })
+
   // HARDCORE THE JAVASCRIPT FIRST, and THEN set up a route in the server and replace
   // hardcoding with server api call
   // .controller('ChatCtrl', function ($scope) {
@@ -51,7 +52,19 @@ angular
   // })
 
 // NOW CAN GRAB THE MESSAGES FROM THE API ROUTE IN THE SERVER
-    .controller('ChatCtrl', function ($scope, $http) {
+  .controller('ChatCtrl', function ($scope, $http) {
+    $scope.sendMessage = () => {
+      const msg = {
+        author: $scope.author,
+        content: $scope.content,
+      }
+
+      $http
+        .post('/api/messages', msg)
+        .then(() => $scope.messages.push(msg))
+        .catch(console.error)
+    }
+
     $http
       .get('/api/messages')
       .then(({ data: { messages }}) =>
