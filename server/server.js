@@ -14,4 +14,19 @@ app.get('/api/title', (req, res) =>
   res.json({ title: 'MEAN Chat' })
 )
 
+app.get('/api/messages', (req, res) =>
+  res.json({
+    messages: [
+      {
+        author: 'John',
+        content: 'YO SUP',
+      },
+      {
+        author: 'Anonymous',
+        content: 'SUP COHORT 14',
+      }
+    ]
+  })
+)
+
 app.listen(port, () => console.log(`Listening on port: ${port}`))
