@@ -11,7 +11,7 @@ app.use(express.static('client'))
 // set up a route and then when route gets hit, it sends the title
 
 app.get('/api/title', (req, res) =>
-  res.json({ title: 'MEAN 101' })
+  res.json({ title: 'MEAN Chat' })
 )
 
 app.listen(port, () => console.log(`Listening on port: ${port}`))
